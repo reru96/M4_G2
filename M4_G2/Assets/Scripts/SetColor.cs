@@ -23,28 +23,42 @@ public class SetColor : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
-        {
             Ray ray = main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+            RaycastHit _hit;
 
+        if (Input.GetMouseButton(0))
+        {
             if (Physics.Raycast(ray, out hit))
             {
                 Renderer rend = hit.collider.GetComponent<Renderer>();
 
                 if (rend != null)
                 {
-                    if (Input.GetMouseButton(0))
-                    {
-                        rend.material.color = colorManager.selectedColor;
-                    }
-                    else if (Input.GetMouseButton(1))
-                    {
-                        rend.material.SetColor("_BaseColor", Color.white);
-                    }
+
+                    rend.material.color = colorManager.selectedColor;
+
+                }
+
+            }
+        }
+        
+        if (Input.GetMouseButton(1))
+        {
+            if (Physics.Raycast(ray, out _hit))
+            {
+                Renderer rend = _hit.collider.GetComponent<Renderer>();
+                if (rend != null && _hit.collider.CompareTag("Quad"))
+                {
+                    Debug.Log(_hit.collider.gameObject.name);
+                    rend.material.SetColor("_BaseColor", Color.white);
+                    
                 }
             }
         }
+                
+            
+        
 
     }
 

@@ -807,9 +807,9 @@ MonoBehaviour:
   parent: {fileID: 829711561}
   rows: 10
   columns: 10
-  offsetRow: 0.3
-  offsetColumn: 0.3
-  offsetLayers: 0.3
+  offsetRow: 0.21
+  offsetColumn: 0.21
+  offsetLayers: 0.21
   layers: 10
 --- !u!1 &832575517
 GameObject:
