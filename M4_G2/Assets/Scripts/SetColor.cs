@@ -1,0 +1,52 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEditor;
+using UnityEngine;
+
+public class SetColor : MonoBehaviour
+{
+
+    private Material mat;
+    private ColorManager colorManager;
+    public Ray ray;
+    private Camera main;
+
+    void Start()
+    {
+        main = Camera.main;
+        mat = GetComponent<Renderer>().material;
+        colorManager = FindAnyObjectByType<ColorManager>();
+    }
+
+
+
+    void Update()
+    {
+        if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
+        {
+            Ray ray = main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                Renderer rend = hit.collider.GetComponent<Renderer>();
+
+                if (rend != null)
+                {
+                    if (Input.GetMouseButton(0))
+                    {
+                        rend.material.color = colorManager.selectedColor;
+                    }
+                    else if (Input.GetMouseButton(1))
+                    {
+                        rend.material.SetColor("_BaseColor", Color.white);
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+
